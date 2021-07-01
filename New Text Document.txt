@@ -1,0 +1,133 @@
+//Множественное наследование
+/*#include <iostream>
+using namespace std;
+
+class Roga
+{
+protected:
+	//Цвет рога
+	char color[25];
+	//Вес рога
+	int weight;
+
+public:
+	//Конструктор
+	Roga()
+	{
+		cout << "Roga Constructor: " << this << endl;
+		strcpy_s(color, 24, "Dirty");
+		weight = 20;
+	}
+	//Конструктор с параметрами
+	Roga(const char* color, int weight)
+	{
+		strcpy_s(this->color, 24, color);
+		this->weight = weight;
+	}
+	//Деструктор
+	~Roga()
+	{
+		cout << "Roga Destructor: " << this << endl;
+	}
+};
+
+class Kopyta
+{
+protected:
+	//Форма копыт
+	char form[25];
+	//Размер
+	int size;
+
+public:
+	//Конструктор
+	Kopyta()
+	{
+		cout << "Kopyta Constructor: " << this << endl;
+		strcpy_s(form, 24, "Big");
+		size = 10;
+	}
+	//Конструктор с параметрами
+	Kopyta(const char* form, int size)
+	{
+		cout << "Kopyta Constructor: " << this << endl;
+		strcpy_s(this->form, 24, form);
+		this->size = size;
+	}
+	//Деструктор
+	~Kopyta()
+	{
+		cout << "Kopyta Destructor: " << this << endl;
+	}
+};
+
+//Класс "Лось", производный от классов "Рога" и "Копыта"
+class Los :public Roga, public Kopyta
+{
+public:
+	//Имя Лося
+	char name[255];
+
+	//Конструктор
+	Los(const char* name)
+	{
+		cout << "Lost Constructor: " << this << endl;
+		strcpy_s(this->name, 254, name);
+	}
+	//Функция потомка может обращаться к элементов обоих базовых классов
+	void DisplayInfo()
+	{
+		cout << "Name: " << name << endl;
+		cout << "Form: " << form << endl;
+		cout << "Color: " << color << endl;
+		cout << "Weight: " << weight << endl;
+		cout << "Razmer kopyt: " << size << endl;
+	}
+
+	//Деструктор
+	~Los()
+	{
+		cout << "Los Destructor: " << this << endl;
+	}
+};
+
+int main()
+{
+	//Создание объекта класса-потомка
+	Los l("Vasya");
+	l.DisplayInfo();
+
+	return 0;
+}*/
+
+//Наследование шаблонов
+
+//класс-родитель
+template <class T>
+class Pair
+{
+	T a;
+	T b;
+public:
+	Pair(T t1, T t2): a{t1}, b{t2}
+	{
+		cout << "Pair Constructor: " << this << endl;
+	}
+
+	~Pair()
+	{
+		cout << "Pair Destructor: " << this << endl;
+	}
+};
+
+//класс-потомок
+template <class T>
+class Trio : public Pair <T>
+{
+	T c;
+public:
+	Trio(T t1, T t2, T t3) : Pair<T>(t1, t2), c{ t3 }
+	{
+		cout << "Trio Constructor: " << this << endl;
+	}
+};
